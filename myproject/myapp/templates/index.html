@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Book</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f6f9;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: #2c3e50;
+            padding: 15px;
+            text-align: right;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            color: #1abc9c;
+        }
+
+        /* Container */
+        .container {
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        h1, h3 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        /* Form Card */
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input[type="submit"] {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: #1abc9c;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #16a085;
+        }
+
+        /* Table */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px;
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f2f2f2;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+        }
+
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        .btn-update {
+            text-decoration: none;
+            padding: 6px 12px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 5px;
+        }
+
+        .btn-update:hover {
+            background-color: #2980b9;
+        }
+
+        .logout-btn {
+            background-color: #e67e22;
+        }
+
+        .logout-btn:hover {
+            background-color: #d35400;
+        }
+        
+</style>
+
+       
+    </style>
+</head>
+<body>
+   <div class="navbar">
+    <a href="#">Home</a>
+    <a href="#">Books</a>
+    <a href="#">About Us</a>
+    <a href="#">logout</a>
+
+    
+
+       
+    </div>
+</div>
+<h1>Welcome {{ user.username }}</h1>
+
+    <form method="post" action="{% url 'logout' %}">
+        {%csrf_token%}
+        <input type="submit" name="Logout" value="Logout">
+    </form>
+    
+    <h1>Welcome {{user.username}}</h1>
+    
+
+    <h1>Book Management Stystem</h1>
+    <h3> Create </h3>
+     <form method="post">
+        {%csrf_token%}
+        <label>Book Name</label>
+        <input type="text" name="name"> <br><br>
+        <label>Author Name</label>
+        <input type="text" name="author"><br><br>
+        <label>Book Price</label>
+        <input type="text" name="price"> <br><br>
+        <input type="submit" name="Add" value="Add">
+     </form>
+     <br><br>
+<h3>Read</h3>
+     <table>
+        <tr>
+            <th>Book ID</th>
+            <th>Book Name</th>
+            <th>Book Author</th>
+            <th>Book Price</th>
+        </tr>
+        {% for i in Books%}
+        <tr>
+            <td>{{i.id}}</td>
+            <td>{{i.bookName}}</td>
+            <td>{{i.bookAuthor}}</td>
+            <td>{{i.bookPrice}}</td>
+            <td><form method="post" action="{% url 'delete' i.id %}">
+                {%csrf_token%}
+                <input type="submit" value="Delete">
+            </form></td>
+            <td><a href="{% url 'update' i.id %}">Update</a></td>
+        </tr>
+        {%endfor%}
+     </table>
+     <br><br>
+
+
+
+
+
+
+
+
+
+     <form method="post">
+        {%csrf_token%}
+        <input type="submit" name="delete" value="Delete ALL">
+     </form>
+</body>
+</html>

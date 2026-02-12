@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+         
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Poppins', sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background: linear-gradient(135deg,#1e3c72,#2a5298);
+        }
+
+        .form-container{
+            width:380px;
+            padding:40px;
+            background:rgb(153, 219, 228);
+            border-radius:15px;
+            box-shadow:0 20px 40px rgba(0,0,0,0.2);
+            animation: slideIn 0.8s ease;
+        }
+
+        @keyframes slideIn{
+            from{
+                transform:translateY(40px);
+                opacity:0;
+            }
+            to{
+                transform:translateY(0);
+                opacity:1;
+            }
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:30px;
+            color:#1e3c72;
+        }
+
+        .form-group{
+            position:relative;
+            margin-bottom:25px;
+        }
+
+        .form-group input{
+            width:100%;
+            padding:12px 10px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            outline:none;
+            font-size:14px;
+            transition:0.3s;
+            background:#e9e4e8;
+        }
+
+        .form-group label{
+            position:absolute;
+            top:-8px;
+            left:10px;
+            background:white;
+            padding:0 5px;
+            font-size:12px;
+            color:#1e3c72;
+        }
+
+        .form-group input:focus{
+            border-color:#2a5298;
+            box-shadow:0 0 8px rgba(42,82,152,0.3);
+            background:rgb(158, 149, 155);
+        }
+
+        .btn{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            background:linear-gradient(135deg,#1e3c72,#2a5298);
+            color:white;
+            font-weight:600;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .btn:hover{
+            transform:scale(1.05);
+            box-shadow:0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Responsive */
+        @media(max-width:400px){
+            .form-container{
+                width:90%;
+                padding:30px;
+            }
+        }
+
+    
+        
+    </style>
+    <title>Document</title>
+</head>
+<body>
+
+    
+<div class="form-container">
+    <h2>Update Book</h2>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label>Book Name</label>
+            <input type="text" name="name" value="{{Books.bookName}}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Author Name</label>
+            <input type="text" name="author" value="{{Books.bookAuthor}}" required>
+        </div>
+
+        <div class="form-group">
+            <label>Book Price</label>
+            <input type="text" name="price" value="{{Books.bookPrice}}" required>
+        </div>
+
+        <input type="submit" value="Update Book" class="btn">
+
+    </form>
+</div>
+
+     
